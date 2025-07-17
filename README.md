@@ -6,7 +6,7 @@ Telekom neumožňuje na vybraných staniciach (Markíza, Doma, Dajto, Markíza K
 - počítač (teoreticky je možné použiť aj Termux na Androide - nie je otestované)
 
 ## Informácie pred začatím
-- Počas odblokovania blokovania reklám nebude možné používať VPN.
+- Počas odblokovania blokovania pretáčania reklám nebude možné používať VPN.
 - Tento proces berie zariadeniu značné množstvo operačnej pamäte, odporúčané je raz za čas "reštartovať" aplikáciu PCAPdroid stlačením `⏹` a potom `▶` alebo úplným reštartovaním zariadenia.
 - Kroky v poslednej časti bude nutné zopakovať pri každej aktualizácií aplikácie, ktorá znefunkční predchádzajuce verzie.
 
