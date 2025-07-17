@@ -1,5 +1,5 @@
 # Magio TV pretáčanie reklám
-Od 5. 6. 2025 neumožnuje Telekom na vybraných staniciach (Markíza, Doma, Dajto, Markíza Krimi a Markíza Klasik) voľne pretáčať reklamu (https://www.telekom.sk/wiki/televizia/pretacanie-reklam). Pomocou úpravy aplikácie a jej komunikácií sa táto funkcionalita dá vrátiť späť. Nižšie je uvedený spôsob, ktorým je to možné dosiahnuť na zariadeniach s operačným systémom Android TV/Google TV bez nutnosti rootu (teoreticky je ho možné využiť aj na telefónoch s Androidom a aj na aplikáciu DIGI TV - nie je otestované).
+Telekom neumožňuje na vybraných staniciach (Markíza, Doma, Dajto, Markíza Krimi, Markíza Klasik, JOJ, PLUS a WAU) voľne pretáčať reklamu (https://www.telekom.sk/wiki/televizia/pretacanie-reklam). Pomocou úpravy aplikácie a jej komunikácií sa táto funkcionalita dá vrátiť späť. Nižšie je uvedený spôsob, ktorým je to možné dosiahnuť na zariadeniach s operačným systémom Android TV/Google TV bez nutnosti rootu (teoreticky je ho možné využiť aj na telefónoch s Androidom a aj na aplikáciu DIGI TV - nie je otestované).
 
 ## Potrebné zariadenia
 - Android TV/Google TV televízor/box s aplikáciou Magio TV nainštalovanou z Google Play (nie iných zdrojov)
@@ -12,9 +12,9 @@ Od 5. 6. 2025 neumožnuje Telekom na vybraných staniciach (Markíza, Doma, Dajt
 
 ## Nainštalovanie a pripojenie ADB
 1. Otvor systémové nastavenia
-2. V časti `Systém` -> `Informácie` klikaj na `Zostava operačného systému Android TV`, kým sa nezobrazí, že si vývojár. 
-3. V časti `Systém` -> `Pre vývojárov` zapni `Ladenie cez USB`.
-4. V časti `Systém` -> `Informácie` -> `Stav` si zapíš IP adresu zariadenia zo sekcie `Adresa IP`.
+2. V časti `Systém`/`Predvoľby zariadenia` -> `Informácie` klikaj na `Zostava operačného systému Android TV`/`Zostava`, kým sa nezobrazí, že si vývojár. 
+3. V časti `Systém`/`Predvoľby zariadenia` -> `Pre vývojárov` zapni `Ladenie cez USB`.
+4. V časti `Systém`/`Predvoľby zariadenia` -> `Informácie` -> `Stav` si zapíš IP adresu zariadenia zo sekcie `Adresa IP`.
 5. Na počítači si stiahni `.zip` súbor s SDK Platform Tools pre tvoj operačný systém z https://developer.android.com/tools/releases/platform-tools.
 6. Súbor extrahuj a v priečinku `platform-tools` otvor terminál.
 7. Spusti príkaz `./adb connect IP_ADRESA_ZARIADENIA` pre pripojenie televízora k počítaču cez ADB.
@@ -25,29 +25,29 @@ Od 5. 6. 2025 neumožnuje Telekom na vybraných staniciach (Markíza, Doma, Dajt
 > [!TIP]
 > Navigovanie niektorých aplikácií môže byť pomocou ovládača zložité. V prípade, že nevieš na niečo kliknúť môžeš skúsiť použiť USB alebo Bluetooth myš.
 10. Z Google Play nainštaluj aplikáciu [AnExplorer](https://play.google.com/store/apps/details?id=dev.dworks.apps.anexplorer).
-11. Otvor AnExplorer a v prípade žiadosti o povolenie prístupu k súborom udeľ povolenie ku všetkým súborom.
+11. Otvor AnExplorer, klikni na `Internal Storage` a v prípade žiadosti o povolenie prístupu k súborom udeľ povolenie ku všetkým súborom.
 12. Z Google Play nainštaluj aplikáciu [PCAPdroid](https://play.google.com/store/apps/details?id=com.emanuelef.remote_capture).
 13. Príkazom `./adb shell getprop ro.product.cpu.abi` zisti ABI tvojho zariadenia.
 14. Z https://github.com/emanuele-f/PCAPdroid-mitm/releases stiahni najnovší `.apk` súbor pre tvoje ABI.
 15. Tento súbor premenuj na `PCAPdroid-mitm.apk` a presuň do `platform-tools`.
 16. Spusti príkaz `./adb install PCAPdroid-mitm.apk` pre nainštalovanie MITM doplnku pre PCAPdroid.
-17. Otvor aplikáciu PCAPdroid a stlač `skip`.
-18. Klikni na `≡` a otvor `Decryption rules`.
-19. Klikni na `+` a potom `App`.
-20. Vyber aplikáciu Magio TV.
-21. Vráť sa späť na hlavnú obrazovku aplikácie a otvor nastavenia ikonou `⚙`.
-22. Možnosť `Block QUIC` nastav na `Only for connections to decrypt`.
-23. Vypni možnosť `Full payload`.
-24. Zapni možnosť `Start at boot`.
-25. Zapni možnosť `Restart on disconnection`.
-26. Klikni na `TLS decryption`.
-27. Klikni na `next` a potom znovu na `next`.
-28. Klikni na `export` a pre otvorenie vyber AnExplorer a klikni na `len raz`.
-29. Vyber priečinok `Documents` a výber potvrď ikonou `✓`.
-30. Po vrátení do PCAPdroidu klikni na `skip` a znovu na `skip`, potom na `done`.
-31. Na počítači spusti príkaz `./adb uninstall dev.dworks.apps.anexplorer` pre odinštalovanie aplikácie AnExplorer.
-32. Klikni na `Additional mitmproxy options` a po zobrazení klávesnice spusti príkaz `./adb shell "input text '--allow-hosts=.+-ads-sk\\.cdn\\.magio\\.tv --modify-body=/NOT_SKIPPABLE|PARTIAL_SKIPPABLE/FULLY_SKIPPABLE --modify-body=/\"gracePeriodInSeconds\":60/\"gracePeriodInSeconds\":0'"` (ten vyplní do textového poľa nastavenia pre mitmproxy) a na televízore zvoľ možnosť `ok`.
-33. Spusti príkaz `./adb pull /sdcard/Documents/PCAPdroid_CA.crt pcapdroid.cer` pre skopírovanie certifikátu do počítača.
+17. Otvor aplikáciu PCAPdroid, v prípade žiadosti o povolenie prístupu k súborom udeľ povolenie ku všetkým súborom, na uvítacej obrazovke stlač `skip`.
+18. Otvor nastavenia ikonou `⚙`.
+19. Možnosť `Block QUIC` nastav na `Only for connections to decrypt`.
+20. Vypni možnosť `Full payload`.
+21. Zapni možnosť `Start at boot`.
+22. Zapni možnosť `Restart on disconnection`.
+23. Klikni na `TLS decryption`.
+24. Klikni na `next` a potom znovu na `next`, ak sa zobrazí `install` tak naň klikni a potom klikni na `zrušiť`.
+25. Klikni na `export` a pre otvorenie vyber AnExplorer a klikni na `len raz`.
+26. Vyber priečinok `Download` a výber potvrď ikonou `✓`.
+27. Po vrátení do PCAPdroidu klikni na `skip` a znovu na `skip`, potom na `done`.
+28. Klikni na `Additional mitmproxy options` a po zobrazení klávesnice spusti príkaz `./adb shell "input text '--allow-hosts=.+-ads-sk\\.cdn\\.magio\\.tv --modify-body=/NOT_SKIPPABLE|PARTIAL_SKIPPABLE/FULLY_SKIPPABLE --modify-body=/\"gracePeriodInSeconds\":60/\"gracePeriodInSeconds\":0'"` (ten vyplní do textového poľa nastavenia pre mitmproxy) a na televízore zvoľ možnosť `ok`.
+29. Spusti príkaz `./adb uninstall dev.dworks.apps.anexplorer` pre odinštalovanie aplikácie AnExplorer.
+30. Spusti príkaz `./adb pull /sdcard/Download/PCAPdroid_CA.crt pcapdroid.cer` pre skopírovanie certifikátu do počítača.
+31. Vráť sa späť na hlavnú obrazovku aplikácie, klikni na `≡` a otvor `Decryption rules`.
+32. Klikni na `+` a potom `App`.
+33. Vyber aplikáciu Magio TV.
 
 ## Stiahnutie potrebných Java aplikácií do počítača
 34. Príkazom `java -version` si over, či máš nainštalovanú Javu. V prípade chyby typu `command not found` alebo `'java' is not recognized as an internal or external command` si nainštaluj Javu z https://www.java.com/en/download/.
