@@ -1,0 +1,5 @@
+/java_tools/*.jar
+/*.apk
+/*.apkm
+/tmp_*/
+/.build/
